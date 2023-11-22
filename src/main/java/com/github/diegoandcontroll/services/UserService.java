@@ -2,7 +2,7 @@ package com.github.diegoandcontroll.services;
 
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collector;
+
 import java.util.stream.Collectors;
 
 import com.github.diegoandcontroll.inputs.User.IUser;
