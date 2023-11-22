@@ -1,0 +1,58 @@
+package com.github.diegoandcontroll.services;
+
+import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
+
+import com.github.diegoandcontroll.inputs.User.IUser;
+import com.github.diegoandcontroll.inputs.User.IUserResponse;
+import com.github.diegoandcontroll.model.User;
+import com.github.diegoandcontroll.repositories.UserRepository;
+
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
+import jakarta.transaction.Transactional;
+
+@ApplicationScoped
+public class UserService {
+
+    @Inject
+    UserRepository repository;
+
+    public List<IUserResponse> getAllItems() {
+        List<User> listAll = repository.listAll();
+
+        return listAll.stream().map(i -> IUserResponse.toIUserResponse(i)).collect(Collectors.toList());
+    }
+
+    public User getItemById(UUID id) {
+        return repository.findById(id);
+    }
+
+    @Transactional
+    public IUserResponse createItem(IUser item) {
+        var user = new User(item);
+        repository.persist(user);
+        var response = IUserResponse.toIUserResponse(user);
+        return response;
+    }
+
+    @Transactional
+    public User updateItem(IUser newItem, UUID id) {
+        User existingItem = repository.findById(id);
+        if (existingItem != null) {
+            existingItem.setFirstName(newItem.firstname());
+            existingItem.setLastName(newItem.lastname());
+            existingItem.setEmail(newItem.email());
+            existingItem.setPassword(newItem.password());
+            repository.persist(existingItem);
+        }
+        return existingItem;
+    }
+
+    @Transactional
+    public boolean deleteItem(UUID id) {
+        return repository.deleteById(id);
+    }
+}
