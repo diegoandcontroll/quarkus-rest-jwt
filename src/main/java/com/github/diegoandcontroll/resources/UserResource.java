@@ -27,6 +27,8 @@ public class UserResource {
     @Inject
     UserService service;
 
+   
+
     @GET
     public Response getAllItems() {
         return Response.status(Response.Status.OK).entity(service.getAllItems()).build();
@@ -59,4 +61,6 @@ public class UserResource {
         }
         return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+    
 }
