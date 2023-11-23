@@ -1,13 +1,9 @@
 package com.github.diegoandcontroll.services;
 
-import java.util.Arrays;
-
 import org.eclipse.microprofile.jwt.Claims;
 import org.jose4j.jwt.JwtClaims;
-
 import com.github.diegoandcontroll.model.User;
 import com.github.diegoandcontroll.utils.TokenUtils;
-
 import jakarta.enterprise.context.RequestScoped;
 
 @RequestScoped

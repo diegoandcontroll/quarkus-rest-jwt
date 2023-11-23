@@ -2,22 +2,16 @@ package com.github.diegoandcontroll.services;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
-
 import java.util.stream.Collectors;
-
-import com.github.diegoandcontroll.inputs.Auth.IAuthResponse;
 import com.github.diegoandcontroll.inputs.User.IUser;
 import com.github.diegoandcontroll.inputs.User.IUserResponse;
 import com.github.diegoandcontroll.model.User;
 import com.github.diegoandcontroll.repositories.UserRepository;
-
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 import jakarta.transaction.Transactional;
-import jakarta.ws.rs.NotFoundException;
 
 @ApplicationScoped
 public class UserService {
@@ -67,15 +61,5 @@ public class UserService {
         return repository.deleteById(id);
     }
 
-    public IAuthResponse getToken(UUID userId) {
-        Optional<User> isUser = repository.findByIdOptional(userId);
-        if (isUser.isPresent()) {
-            User user = isUser.get();
-            String token = tokenService.generate(user);
-            IUserResponse toUserResponse = IUserResponse.toIUserResponse(user);
-            IAuthResponse iAuthResponse = new IAuthResponse(toUserResponse, token);
-            return iAuthResponse;
-        }
-        throw new NotFoundException("User not found!");
-    }
+   
 }
