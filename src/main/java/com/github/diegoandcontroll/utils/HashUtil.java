@@ -5,7 +5,7 @@ import org.mindrot.jbcrypt.BCrypt;
 import jakarta.enterprise.context.ApplicationScoped;
 
 @ApplicationScoped
-public class HashUitl {
+public class HashUtil {
   public String encryptPassword(String password) {
     String hashedPassword = BCrypt.hashpw(password, BCrypt.gensalt());
     return hashedPassword;

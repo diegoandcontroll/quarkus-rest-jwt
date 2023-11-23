@@ -10,7 +10,7 @@ import com.github.diegoandcontroll.inputs.User.IUser;
 import com.github.diegoandcontroll.inputs.User.IUserResponse;
 import com.github.diegoandcontroll.model.User;
 import com.github.diegoandcontroll.repositories.UserRepository;
-import com.github.diegoandcontroll.utils.HashUitl;
+import com.github.diegoandcontroll.utils.HashUtil;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -27,7 +27,7 @@ public class AuthService {
   TokenService tokenService;
 
   @Inject
-  HashUitl hash;
+  HashUtil hash;
 
   @Transactional
   public IUserResponse signUp(IUser IRequest) {
